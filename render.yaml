@@ -1,0 +1,76 @@
+services:
+  # Web Service
+  - type: web
+    name: vibe-architecture
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_NAME
+        value: vibe-architecture
+      - key: APP_VERSION
+        value: 1.0.0
+      - key: APP_ENVIRONMENT
+        value: production
+      - key: APP_DEBUG
+        value: false
+      
+      - key: SERVER_HOST
+        value: 0.0.0.0
+      - key: SERVER_PORT
+        value: 8080
+      
+      - key: LOG_LEVEL
+        value: info
+      - key: LOG_FORMAT
+        value: json
+      
+      - key: DB_HOST
+        fromDatabase:
+          name: vibe-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: vibe-db
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: vibe-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: vibe-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: vibe-db
+          property: database
+      - key: DB_SSL_MODE
+        value: require
+      - key: DB_MAX_CONNECTIONS
+        value: 10
+      - key: DB_MIN_CONNECTIONS
+        value: 2
+      
+      # Kafka отключена
+      - key: KAFKA_ENABLED
+        value: false
+      
+      # Tracing отключен для упрощения (можно включить позже)
+      - key: TRACING_ENABLED
+        value: false
+      
+      # Metrics включены
+      - key: METRICS_ENABLED
+        value: true
+      - key: METRICS_PORT
+        value: 9090
+    
+    healthCheckPath: /health
+
+databases:
+  - name: vibe-db
+    databaseName: vibe_architecture
+    plan: free
+    user: vibe_user
