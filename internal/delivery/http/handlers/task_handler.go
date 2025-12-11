@@ -43,7 +43,7 @@ func (h *TaskHandler) HandleTaskByID(w http.ResponseWriter, r *http.Request) {
 	// Extract ID from path
 	path := strings.TrimPrefix(r.URL.Path, "/tasks/")
 	parts := strings.Split(path, "/")
-	
+
 	if len(parts) == 0 || parts[0] == "" {
 		h.respondError(w, http.StatusBadRequest, "Task ID required")
 		return

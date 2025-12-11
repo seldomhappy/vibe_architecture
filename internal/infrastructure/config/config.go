@@ -78,12 +78,12 @@ type MetricsConfig struct {
 
 // KafkaConfig represents Kafka settings
 type KafkaConfig struct {
-	Enabled  bool            `yaml:"enabled" env:"KAFKA_ENABLED"`
-	Brokers  []string        `yaml:"brokers" env:"KAFKA_BROKERS" env-separator:","`
-	Version  string          `yaml:"version" env:"KAFKA_VERSION"`
-	Producer ProducerConfig  `yaml:"producer"`
-	Consumer ConsumerConfig  `yaml:"consumer"`
-	Topics   TopicsConfig    `yaml:"topics"`
+	Enabled  bool           `yaml:"enabled" env:"KAFKA_ENABLED"`
+	Brokers  []string       `yaml:"brokers" env:"KAFKA_BROKERS" env-separator:","`
+	Version  string         `yaml:"version" env:"KAFKA_VERSION"`
+	Producer ProducerConfig `yaml:"producer"`
+	Consumer ConsumerConfig `yaml:"consumer"`
+	Topics   TopicsConfig   `yaml:"topics"`
 }
 
 // ProducerConfig represents Kafka producer settings

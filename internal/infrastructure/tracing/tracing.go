@@ -22,7 +22,7 @@ func NewTracer(cfg config.TracingConfig, log logger.ILogger) (*Tracer, error) {
 
 	// TODO: Implement actual tracing with OpenTelemetry/Jaeger
 	log.Info("Tracing initialized (stub)")
-	
+
 	return &Tracer{
 		cfg: cfg,
 		log: log,

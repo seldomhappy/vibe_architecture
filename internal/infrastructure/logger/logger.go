@@ -27,7 +27,7 @@ type Logger struct {
 // NewLogger creates a new logger instance
 func NewLogger(cfg config.LoggerConfig) ILogger {
 	logger := log.New(os.Stdout, "", log.LstdFlags)
-	
+
 	return &Logger{
 		logger: logger,
 		level:  cfg.Level,
@@ -86,9 +86,9 @@ func (l *Logger) shouldLog(level string) bool {
 		"error": 3,
 		"fatal": 4,
 	}
-	
+
 	configLevel := levels[l.level]
 	messageLevel := levels[level]
-	
+
 	return messageLevel >= configLevel
 }
