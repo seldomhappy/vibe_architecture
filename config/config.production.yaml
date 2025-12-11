@@ -1,0 +1,56 @@
+app:
+  name: vibe-architecture
+  version: 1.0.0
+  environment: production
+  debug: false
+
+server:
+  host: 0.0.0.0
+  port: 8080
+  read_timeout: 15s
+  write_timeout: 15s
+  shutdown_timeout: 30s
+
+logger:
+  level: info
+  format: json
+
+db:
+  host: postgres
+  port: 5432
+  user: postgres
+  password: postgres
+  database: vibe_architecture
+  ssl_mode: require
+  max_open_conns: 50
+  max_idle_conns: 10
+  conn_max_lifetime: 10m
+  conn_max_idle_time: 5m
+
+tracing:
+  enabled: true
+  service_name: vibe-architecture
+  jaeger_endpoint: http://jaeger:14268/api/traces
+  sampling_rate: 0.1
+
+metrics:
+  enabled: true
+  port: 9090
+  path: /metrics
+
+kafka:
+  brokers:
+    - kafka:9092
+  consumer_group_id: vibe-architecture-group
+  topics:
+    task_events: task.events
+  producer:
+    compression: snappy
+    retry_max: 5
+    retry_backoff: 200ms
+    idempotent: true
+    timeout: 30s
+  consumer:
+    workers: 5
+    session_timeout: 20s
+    rebalance_timeout: 120s
