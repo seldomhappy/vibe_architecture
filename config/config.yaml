@@ -1,0 +1,76 @@
+app:
+  name: "vibe-architecture"
+  version: "1.0.0"
+  environment: "production"
+  debug: false
+
+server:
+  host: "0.0.0.0"
+  port: 8080
+  read_timeout: "30s"
+  write_timeout: "30s"
+  idle_timeout: "120s"
+
+logger:
+  level: "info"
+  format: "json"
+  output: "stdout"
+
+db:
+  host: "localhost"  # Will be overridden by ENV
+  port: 5432
+  user: "postgres"
+  password: "postgres"
+  database: "vibe_architecture"
+  ssl_mode: "require"  # Important for Render
+  max_connections: 10   # Lower for free tier
+  min_connections: 2
+  max_conn_lifetime: "10m"
+  max_conn_idle_time: "15m"
+  health_check_period: "1m"
+  connect_timeout: "10s"
+
+tracing:
+  enabled: false  # Disabled for simplicity
+  service_name: "vibe-architecture"
+  service_version: "1.0.0"
+  environment: "production"
+  jaeger_endpoint: "http://localhost:14268/api/traces"
+  sample_rate: 0.1
+
+metrics:
+  enabled: true
+  port: 9090
+  path: "/metrics"
+  version: "1.0.0"
+  environment: "production"
+
+kafka:
+  enabled: false  # DISABLED for Render
+  brokers: []
+  version: "3.4.0"
+  
+  producer:
+    enabled: false
+  
+  consumer:
+    enabled: false
+    group_id: ""
+  
+  topics:
+    task_created:
+      name: "task.created"
+      partitions: 1
+      replication_factor: 1
+    task_updated:
+      name: "task.updated"
+      partitions: 1
+      replication_factor: 1
+    task_completed:
+      name: "task.completed"
+      partitions: 1
+      replication_factor: 1
+    task_deleted:
+      name: "task.deleted"
+      partitions: 1
+      replication_factor: 1
