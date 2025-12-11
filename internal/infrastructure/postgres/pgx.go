@@ -79,7 +79,7 @@ func (db *DB) Shutdown(ctx context.Context) error {
 }
 
 // Exec executes a query without returning any rows
-func (db *DB) Exec(ctx context.Context, query string, args ...interface{}) error {
+func (db *DB) Exec(ctx context.Context, query string, args ...any) error {
 	start := time.Now()
 	span := trace.SpanFromContext(ctx)
 	span.SetAttributes(
@@ -101,7 +101,7 @@ func (db *DB) Exec(ctx context.Context, query string, args ...interface{}) error
 }
 
 // Query executes a query that returns rows
-func (db *DB) Query(ctx context.Context, query string, args ...interface{}) (pgx.Rows, error) {
+func (db *DB) Query(ctx context.Context, query string, args ...any) (pgx.Rows, error) {
 	start := time.Now()
 	span := trace.SpanFromContext(ctx)
 	span.SetAttributes(
@@ -123,7 +123,7 @@ func (db *DB) Query(ctx context.Context, query string, args ...interface{}) (pgx
 }
 
 // QueryRow executes a query that returns at most one row
-func (db *DB) QueryRow(ctx context.Context, query string, args ...interface{}) pgx.Row {
+func (db *DB) QueryRow(ctx context.Context, query string, args ...any) pgx.Row {
 	start := time.Now()
 	span := trace.SpanFromContext(ctx)
 	span.SetAttributes(

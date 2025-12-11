@@ -123,7 +123,7 @@ func (r *TaskRepository) GetAll(ctx context.Context, filter TaskFilter) ([]*doma
 		FROM tasks
 		WHERE 1=1
 	`
-	args := make([]interface{}, 0)
+	args := make([]any, 0)
 	argCount := 1
 
 	if filter.Status != nil {

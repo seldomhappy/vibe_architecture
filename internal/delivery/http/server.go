@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/seldomhappy/vibe_architecture/internal/pkg/metrics"
@@ -128,6 +129,5 @@ func (s *Server) Shutdown(ctx context.Context) error {
 }
 
 func contains(s, substr string) bool {
-	return len(s) >= len(substr) && s[len(s)-len(substr):] == substr || 
-	       (len(s) > len(substr) && s[:len(s)-len(substr)] != s && contains(s[1:], substr))
+	return strings.Contains(s, substr)
 }
