@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -72,7 +73,9 @@ func (l *Logger) Fatal(format string, args ...interface{}) {
 func (l *Logger) log(level string, format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	if l.format == "json" {
-		l.logger.Printf(`{"level":"%s","message":"%s"}`, level, msg)
+		// Use json.Marshal to properly escape the message
+		msgBytes, _ := json.Marshal(msg)
+		l.logger.Printf(`{"level":"%s","message":%s}`, level, string(msgBytes))
 	} else {
 		l.logger.Printf("[%s] %s", level, msg)
 	}

@@ -53,15 +53,15 @@ services:
       - key: DB_MIN_CONNECTIONS
         value: 2
       
-      # Kafka отключена
+      # Kafka disabled
       - key: KAFKA_ENABLED
         value: false
       
-      # Tracing отключен для упрощения (можно включить позже)
+      # Tracing disabled for simplicity (can be enabled later)
       - key: TRACING_ENABLED
         value: false
       
-      # Metrics включены
+      # Metrics enabled
       - key: METRICS_ENABLED
         value: true
       - key: METRICS_PORT
